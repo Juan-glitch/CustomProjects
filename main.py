@@ -72,14 +72,21 @@ class Ball(turtle.Turtle):
             ball.goto(0, 0)
             ball.dx *= -1
             self.score_a += 1
+            
+
 
         if ball.xcor() < -390:
             ball.goto(0, 0)
             ball.dx *= -1
             self.score_b += 1
+
            
     def update(self):
-        self.move()
+        if (self.score_b < 2) or (self.score_a < 2):
+            self.move()
+        else:
+            # stop the game
+            pass
 
 class Score(turtle.Turtle):
     def __init__(self, color, gotoX = 0, gotoY = 270, size = 20):
@@ -101,7 +108,10 @@ class Score(turtle.Turtle):
 
     def update(self, ball):
         self.clear()
-        self.write(f'Player A: {ball.score_a}  Player B: {ball.score_b}', align='center', font=('Courier', size, 'normal'))
+        if isinstance(ball.score_a, int) and isinstance(ball.score_b, int):
+            self.write(f'Player A: {ball.score_a}  Player B: {ball.score_b}', align='center', font=('Courier', 20, 'normal'))
+
+
       
 
 if __name__ == '__main__':
